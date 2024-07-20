@@ -17,7 +17,8 @@ from app.utils.send_lark_message import send_a_message
 
 api_id = 20464789  # 你的 api_id
 api_hash = '87c3a2090b3c3fd98ea22da5e4d39a44'  # 你的 api_hash
-chat_id = 1002080008623  # 群组ID
+# chat_id = 1002080008623  # 群组ID
+chat_id = 4140777618  # 群组ID
 
 client = TelegramClient('session', api_id, api_hash)
 
@@ -53,7 +54,7 @@ async def handler(event):
 
         if event.user_joined or event.user_added:
             user = await event.get_user()
-            loguru.logger.info(f'新成员加入: {user.id} - {user.first_name} {user.last_name if user.last_name else ""}')
+            loguru.logger.info(f'新成员加入: {user.id} - {user.first_name} {user.las_name if user.last_name else ""}')
 
             information = {
                 "tg_id": user.id,
