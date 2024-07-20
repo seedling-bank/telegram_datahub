@@ -54,7 +54,7 @@ async def handler(event):
 
         if event.user_joined or event.user_added:
             user = await event.get_user()
-            loguru.logger.info(f'新成员加入: {user.id} - {user.first_name} {user.las_name if user.last_name else ""}')
+            loguru.logger.info(f'新成员加入: {user.id} - {user.first_name} {user.last_name if user.last_name else ""}')
 
             information = {
                 "tg_id": user.id,
