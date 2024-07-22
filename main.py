@@ -50,7 +50,8 @@ async_session = sessionmaker(
 @client.on(events.ChatAction)
 async def handler(event):
     try:
-        redis_client = redis.Redis(host='127.0.0.1', port=6379, db=3)
+        REDIS_URL = "redis://localhost:6379/3"
+        redis_client = redis.Redis(REDIS_URL)
 
         utc_time = datetime.utcnow().replace(tzinfo=pytz.utc)
         formatted_utc_time = utc_time.strftime('%Y-%m-%d %H:%M:%S')
