@@ -80,7 +80,7 @@ async def handler(event):
                     await session.commit()
 
                 message = json.dumps(information)
-                result = redis_client.publish('update_tg_user', message)
+                result = await redis_client.publish('update_tg_user', message)
                 print(result)
             except Exception as e:
                 loguru.logger.error(traceback.format_exc())
