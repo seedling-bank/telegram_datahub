@@ -10,6 +10,7 @@ from sqlalchemy import insert, event
 from sqlalchemy.exc import DisconnectionError
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy.orm import sessionmaker
+from redis import asyncio as aioredis
 
 
 from telethon import TelegramClient, events
@@ -50,7 +51,9 @@ async_session = sessionmaker(
 @client.on(events.ChatAction)
 async def handler(event):
     try:
-        redis_client = redis.Redis(host="localhost", port=6379, db=3)
+        REDIS_URL = "redis://localhost:6379"
+        pool = aioredis.ConnectionPool.from_url(REDIS_URL, max_connections=10)
+        redis_client = aioredis.Redis(connection_pool=pool)
 
         utc_time = datetime.utcnow().replace(tzinfo=pytz.utc)
         formatted_utc_time = utc_time.strftime('%Y-%m-%d %H:%M:%S')
