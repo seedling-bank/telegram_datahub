@@ -51,7 +51,7 @@ async_session = sessionmaker(
 @client.on(events.ChatAction)
 async def handler(event):
     try:
-        REDIS_URL = "redis://localhost:6379"
+        REDIS_URL = "redis://10.244.4.140:6379"
         pool = aioredis.ConnectionPool.from_url(REDIS_URL, max_connections=10)
         redis_client = aioredis.Redis(connection_pool=pool)
 
