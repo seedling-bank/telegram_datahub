@@ -1,9 +1,11 @@
 import asyncio
+import json
 import traceback
 from datetime import datetime
 
 import loguru
 import pytz
+import redis
 from sqlalchemy import insert, event
 from sqlalchemy.exc import DisconnectionError
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
@@ -48,6 +50,8 @@ async_session = sessionmaker(
 @client.on(events.ChatAction)
 async def handler(event):
     try:
+        redis_client = redis.Redis(host='127.0.0.1', port=6379, db=3)
+
         utc_time = datetime.utcnow().replace(tzinfo=pytz.utc)
         formatted_utc_time = utc_time.strftime('%Y-%m-%d %H:%M:%S')
         timestamp = int(utc_time.timestamp() * 1000)
@@ -71,6 +75,10 @@ async def handler(event):
                     query = insert(t_tg_users).values(information)
                     await session.execute(query)
                     await session.commit()
+
+                message = json.dumps(information)
+                result = redis_client.publish('update_tg_user', message)
+                print(result)
             except Exception as e:
                 loguru.logger.error(traceback.format_exc())
                 send_a_message(traceback.format_exc())
