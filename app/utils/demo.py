@@ -1,30 +1,21 @@
-@router.get("/tg_me")
-async def tg_me(tg_code: int, user_id, db: Database = Depends(get_db), tg_name: Optional[str] = None):
-    try:
-        information = {
-            "tg_id": tg_code,
-            "tg_username": tg_name
-        }
-        query = t_users.update().where(t_users.c.id == user_id).values(information)
+from telethon.sync import TelegramClient
+from telethon.tl.types import InputPeerEmpty
 
-        try:
-            await db.execute(query)
-        except Exception as e:
-            loguru.logger.info(e)
-            loguru.logger.error(traceback.format_exc())
+# 填入你的 Telegram API credentials
+api_id = 20464789
+api_hash = "87c3a2090b3c3fd98ea22da5e4d39a44"
 
-        select_user = t_users.select().where(t_users.c.id == user_id)
-        user_data = dict(await db.fetch_one(query=select_user))
-        return JSONResponse(
-            content=dict(
-                code=200,
-                message="successful",
-                data=dict(user_data),
-            )
-        )
-    except Exception as e:
-        logger.error(traceback.format_exc())
-        return JSONResponse({"error": "error"})
-    # user_info = await tus.fetch_user_info(token.get("access_token"))
-    # logger.info(user_info)
-    # logger.info(token)
+async def main():
+    async with TelegramClient('abc', api_id, api_hash) as client:
+        # 获取所有 chat
+        async for dialog in client.iter_dialogs():
+            # print(f'Chat ID: {dialog.id}, Chat Name: {dialog.name}')
+            try:
+                print(dialog)
+                print(dialog.entiry.id)
+            except Exception as e:
+                print(e)
+
+if __name__ == '__main__':
+    import asyncio
+    asyncio.run(main())
