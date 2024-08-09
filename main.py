@@ -53,7 +53,7 @@ async def handler(event):
     try:
         # REDIS_URL = "redis://10.244.4.140:6379"
         REDIS_URL = "redis://10.244.4.202:6379"
-        pool = aioredis.ConnectionPool.from_url(REDIS_URL, max_connections=10)
+        pool = aioredis.ConnectionPool.from_url(REDIS_URL, max_connections=10000)
         redis_client = aioredis.Redis(connection_pool=pool)
 
         utc_time = datetime.utcnow().replace(tzinfo=pytz.utc)
