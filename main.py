@@ -6,16 +6,15 @@ from datetime import datetime
 import loguru
 import pytz
 import redis
-from sqlalchemy import insert, event
+from sqlalchemy import insert, event, select
 from sqlalchemy.exc import DisconnectionError
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy.orm import sessionmaker
 from redis import asyncio as aioredis
 
-
 from telethon import TelegramClient, events
 
-from app.models.users_models import t_tg_users
+from app.models.users_models import t_tg_users, t_users
 from app.utils.send_lark_message import send_a_message
 
 api_id = 20464789  # 你的 api_id
@@ -26,7 +25,7 @@ chat_id = 1002080008623  # 群组ID
 client = TelegramClient('session', api_id, api_hash)
 
 engine = create_async_engine(
-    "mysql+aiomysql://cb:cryptoBricks123@34.218.139.166:3306/da_test?charset=utf8mb4",
+    "mysql+aiomysql://cb:cryptoBricks123@cb-rds.cw5tnk9dgstt.us-west-2.rds.amazonaws.com/da_test?charset=utf8mb4",
     pool_pre_ping=True,
     pool_recycle=3600,
     pool_size=10,
@@ -63,7 +62,8 @@ async def handler(event):
         if event.user_joined or event.user_added:
             user = await event.get_user()
             if user:
-                loguru.logger.info(f'新成员加入: {user.id} - {user.first_name} {user.last_name if user.last_name else ""}')
+                loguru.logger.info(
+                    f'新成员加入: {user.id} - {user.first_name} {user.last_name if user.last_name else ""}')
 
                 information = {
                     "tg_id": user.id,
@@ -82,9 +82,19 @@ async def handler(event):
                         await session.execute(query)
                         await session.commit()
 
-                    message = json.dumps(information)
-                    result = await redis_client.publish('update_tg_user', message)
-                    print(result)
+                    query = select(t_users.c.id).where(t_users.c.tg_id == user.id)
+                    try:
+                        async with async_session() as session:
+                            result = await session.execute(query)
+                            user = result.scalars().first()
+
+                            if user:
+                                message = json.dumps(information)
+                                await redis_client.publish(f'update_tg_user_{user}', message)
+                    except Exception as e:
+                        loguru.logger.error(traceback.format_exc())
+                        send_a_message(traceback.format_exc())
+
                 except Exception as e:
                     loguru.logger.error(traceback.format_exc())
                     send_a_message(traceback.format_exc())
