@@ -20,7 +20,7 @@ from app.utils.send_lark_message import send_a_message
 api_id = 20464789  # 你的 api_id
 api_hash = '87c3a2090b3c3fd98ea22da5e4d39a44'  # 你的 api_hash
 
-client = TelegramClient('a', api_id, api_hash)
+client = TelegramClient('session', api_id, api_hash)
 
 # with client:
 #     client.start()  # 启动客户端
