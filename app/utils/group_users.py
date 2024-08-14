@@ -43,9 +43,9 @@ from telethon.tl.types import InputPeerChat
 api_id = 20464789
 api_hash = "87c3a2090b3c3fd98ea22da5e4d39a44"
 
-
+chat_id = 4140777618
 async def get_group_members_tgid(chat_id):
-    async with TelegramClient('session_name', api_id, api_hash) as client:
+    async with TelegramClient('aaa', api_id, api_hash) as client:
         # 获取群组成员列表
         participants = await client.get_participants(chat_id)
 
@@ -120,4 +120,5 @@ async def get_group_members_tgid(chat_id):
 if __name__ == '__main__':
     import asyncio
 
-    asyncio.run(get_group_members_tgid())
+    chat_id = 4140777618
+    asyncio.run(get_group_members_tgid(chat_id=chat_id))

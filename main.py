@@ -19,10 +19,10 @@ from app.utils.send_lark_message import send_a_message
 
 api_id = 20464789  # 你的 api_id
 api_hash = '87c3a2090b3c3fd98ea22da5e4d39a44'  # 你的 api_hash
-chat_id = 1002080008623  # 群组ID
-# chat_id = 4140777618  # 群组ID
+# chat_id = 1002080008623  # 群组ID
+chat_id = 4140777618  # 群组ID
 
-client = TelegramClient('session', api_id, api_hash)
+client = TelegramClient('session.session', api_id, api_hash)
 
 engine = create_async_engine(
     "mysql+aiomysql://cb:cryptoBricks123@cb-rds.cw5tnk9dgstt.us-west-2.rds.amazonaws.com/da_test?charset=utf8mb4",
