@@ -22,12 +22,12 @@ api_hash = '87c3a2090b3c3fd98ea22da5e4d39a44'  # 你的 api_hash
 chat_id = 1002080008623  # 群组ID
 # chat_id = 4140777618  # 群组ID
 
-client = TelegramClient('session.session', api_id, api_hash)
+client = TelegramClient('session', api_id, api_hash)
 
-with client:
-    client.start()  # 启动客户端
-    loguru.logger.info("Telegram客户端连接成功！")  # 添加连接成功的日志消息
-    client.run_until_disconnected()  # 运行客户端直到断开连接
+# with client:
+#     client.start()  # 启动客户端
+#     loguru.logger.info("Telegram客户端连接成功！")  # 添加连接成功的日志消息
+#     client.run_until_disconnected()  # 运行客户端直到断开连接
 
 engine = create_async_engine(
     "mysql+aiomysql://cb:cryptoBricks123@cb-rds.cw5tnk9dgstt.us-west-2.rds.amazonaws.com/da_test?charset=utf8mb4",
