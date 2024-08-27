@@ -20,6 +20,20 @@ t_tg_users = Table(
     Column("time_at", DATETIME()),
 )
 
+t_lumoz_tg_users_info = Table(
+    "lumoz_tg_users_info",
+    metadata,
+    Column("id", INTEGER(), primary_key=True, autoincrement=True),
+    Column("tg_id", BIGINT()),
+    Column("tg_first_name", String(255, "utf8mb4_unicode_520_ci")),
+    Column("tg_last_name", String(255, "utf8mb4_unicode_520_ci")),
+    Column("tg_username", String(255, "utf8mb4_unicode_520_ci")),
+    Column("tg_phone", String(255, "utf8mb4_unicode_520_ci")),
+    Column("create_time", String(255, "utf8mb4_unicode_520_ci")),
+    Column("update_time", String(255, "utf8mb4_unicode_520_ci")),
+    Column("time_at", DATETIME()),
+)
+
 t_users = Table(
     "users",
     metadata,
