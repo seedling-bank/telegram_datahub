@@ -20,8 +20,8 @@ from app.utils.send_lark_message import send_a_message
 api_id = 20464789  # 你的 api_id
 api_hash = '87c3a2090b3c3fd98ea22da5e4d39a44'  # 你的 api_hash
 
-# client = TelegramClient('session', api_id, api_hash)
-client = TelegramClient('abcd', api_id, api_hash)
+client = TelegramClient('session', api_id, api_hash)
+# client = TelegramClient('abcd', api_id, api_hash)
 
 # with client:
 #     client.start()  # 启动客户端
@@ -166,119 +166,9 @@ async def handler(event):
         send_a_message(traceback.format_exc())
 
 
-@client.on(events.ChatAction(chats=4140777618))
-async def handler(event):
-    try:
-        # REDIS_URL = "redis://10.244.4.140:6379"
-        # REDIS_URL = "redis://10.244.4.58:6379"
-        # pool = aioredis.ConnectionPool.from_url(REDIS_URL, max_connections=10000)
-        # redis_client = aioredis.Redis(connection_pool=pool)
-
-        utc_time = datetime.utcnow().replace(tzinfo=pytz.utc)
-        formatted_utc_time = utc_time.strftime('%Y-%m-%d %H:%M:%S')
-        timestamp = int(utc_time.timestamp() * 1000)
-
-        if event.user_joined or event.user_added:
-            user = await event.get_user()
-            if user:
-                loguru.logger.info(
-                    f'新成员加入DA: {user.id} - {user.first_name} {user.last_name if user.last_name else ""}')
-
-                # information = {
-                #     "tg_id": user.id,
-                #     "tg_first_name": user.first_name,
-                #     "tg_last_name": user.last_name,
-                #     "tg_username": user.username,
-                #     "tg_phone": user.phone,
-                #     "create_time": timestamp,
-                #     "update_time": timestamp,
-                #     "time_at": formatted_utc_time
-                # }
-                #
-                # try:
-                #     async with async_session() as session:
-                #         query = insert(t_tg_users).prefix_with("IGNORE").values(information)
-                #         await session.execute(query)
-                #         await session.commit()
-                #
-                #     # query = select(t_users.c.id).where(t_users.c.tg_id == user.id)
-                #     # try:
-                #     #     async with async_session() as session:
-                #     #         result = await session.execute(query)
-                #     #         user = result.scalars().first()
-                #     #
-                #     #         if user:
-                #     #             message = json.dumps(information)
-                #     #             await redis_client.publish(f'update_tg_user_{user}', message)
-                #     # except Exception as e:
-                #     #     loguru.logger.error(traceback.format_exc())
-                #     #     send_a_message(traceback.format_exc())
-                #
-                # except Exception as e:
-                #     loguru.logger.error(traceback.format_exc())
-                #     send_a_message(traceback.format_exc())
-    except Exception as e:
-        loguru.logger.error(traceback.format_exc())
-        send_a_message(traceback.format_exc())
-
-
-@client.on(events.ChatAction(chats=4524529858))
-async def handler(event):
-    try:
-        # REDIS_URL = "redis://10.244.4.140:6379"
-        # REDIS_URL = "redis://10.244.4.58:6379"
-        # pool = aioredis.ConnectionPool.from_url(REDIS_URL, max_connections=10000)
-        # redis_client = aioredis.Redis(connection_pool=pool)
-
-        utc_time = datetime.utcnow().replace(tzinfo=pytz.utc)
-        formatted_utc_time = utc_time.strftime('%Y-%m-%d %H:%M:%S')
-        timestamp = int(utc_time.timestamp() * 1000)
-
-        if event.user_joined or event.user_added:
-            user = await event.get_user()
-            if user:
-                loguru.logger.info(
-                    f'新成员加入DA: {user.id} - {user.first_name} {user.last_name if user.last_name else ""}')
-
-                # information = {
-                #     "tg_id": user.id,
-                #     "tg_first_name": user.first_name,
-                #     "tg_last_name": user.last_name,
-                #     "tg_username": user.username,
-                #     "tg_phone": user.phone,
-                #     "create_time": timestamp,
-                #     "update_time": timestamp,
-                #     "time_at": formatted_utc_time
-                # }
-                #
-                # try:
-                #     async with async_session() as session:
-                #         query = insert(t_tg_users).prefix_with("IGNORE").values(information)
-                #         await session.execute(query)
-                #         await session.commit()
-                #
-                #     # query = select(t_users.c.id).where(t_users.c.tg_id == user.id)
-                #     # try:
-                #     #     async with async_session() as session:
-                #     #         result = await session.execute(query)
-                #     #         user = result.scalars().first()
-                #     #
-                #     #         if user:
-                #     #             message = json.dumps(information)
-                #     #             await redis_client.publish(f'update_tg_user_{user}', message)
-                #     # except Exception as e:
-                #     #     loguru.logger.error(traceback.format_exc())
-                #     #     send_a_message(traceback.format_exc())
-                #
-                # except Exception as e:
-                #     loguru.logger.error(traceback.format_exc())
-                #     send_a_message(traceback.format_exc())
-    except Exception as e:
-        loguru.logger.error(traceback.format_exc())
-        send_a_message(traceback.format_exc())
-
 async def main():
     async with client:
+        await client.start()
         await client.run_until_disconnected()
 
 
