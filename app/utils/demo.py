@@ -7,7 +7,7 @@ from telethon.tl.types import InputPeerEmpty
 api_id = 20464789  # 你的 api_id
 api_hash = '87c3a2090b3c3fd98ea22da5e4d39a44'  # 你的 api_hash
 
-client = TelegramClient('aaaaaaaaa', api_id, api_hash)
+client = TelegramClient('abcdefg', api_id, api_hash)
 
 # import asyncio
 # from telethon import TelegramClient
@@ -114,5 +114,39 @@ gigagroup=False, noforwards=True, join_to_send=False, join_request=False, forum=
 stories_hidden_min=False, stories_unavailable=True, access_hash=-2784474769857460999, username='Lumozannouncement', 
 restriction_reason=[], admin_rights=None, banned_rights=None, default_banned_rights=None, participants_count=19, 
 usernames=[], stories_max_id=None, color=None, profile_color=None, emoji_status=None, level=None))
+
+
+Dialog(name='Lumoz Announcement', date=datetime.datetime(2024, 8, 28, 3, 13, 35, tzinfo=datetime.timezone.utc), 
+draft=<telethon.tl.custom.draft.Draft object at 0x10560dc00>, message=MessageService(id=11, peer_id=PeerChannel(
+channel_id=2210488432), date=datetime.datetime(2024, 8, 28, 3, 13, 35, tzinfo=datetime.timezone.utc), 
+action=MessageActionPinMessage(), out=False, mentioned=False, media_unread=False, silent=True, post=True, 
+legacy=False, from_id=None, reply_to=MessageReplyHeader(reply_to_scheduled=False, forum_topic=False, quote=False, 
+reply_to_msg_id=10, reply_to_peer_id=None, reply_from=None, reply_media=None, reply_to_top_id=None, quote_text=None, 
+quote_entities=[], quote_offset=None), ttl_period=None), entity=Channel(id=2210488432, title='Lumoz Announcement', 
+photo=ChatPhoto(photo_id=5904508592734717071, dc_id=4, has_video=False, 
+stripped_thumb=b'\x01\x08\x08\xcd\x8aD\x893\x83\xbe\x8a(\xa5\xca\x85c'), date=datetime.datetime(2024, 8, 27, 5, 29, 
+54, tzinfo=datetime.timezone.utc), creator=False, left=False, broadcast=True, verified=False, megagroup=False, 
+restricted=False, signatures=False, min=False, scam=False, has_link=False, has_geo=False, slowmode_enabled=False, 
+call_active=False, call_not_empty=False, fake=False, gigagroup=False, noforwards=False, join_to_send=False, 
+join_request=False, forum=False, stories_hidden=False, stories_hidden_min=False, stories_unavailable=True, 
+access_hash=-2784474769857460999, username='Lumozannouncement', restriction_reason=[], admin_rights=None, 
+banned_rights=None, default_banned_rights=None, participants_count=148191, usernames=[], stories_max_id=None, 
+color=None, profile_color=None, emoji_status=None, level=None))
+
+
+Dialog(name='asdadasd', date=datetime.datetime(2024, 8, 26, 9, 58, 9, tzinfo=datetime.timezone.utc), 
+draft=<telethon.tl.custom.draft.Draft object at 0x1074caef0>, message=MessageService(id=15541, peer_id=PeerChat(
+chat_id=4524529858), date=datetime.datetime(2024, 8, 26, 9, 58, 9, tzinfo=datetime.timezone.utc), 
+action=MessageActionChatJoinedByLink(inviter_id=1087968824), out=False, mentioned=False, media_unread=False, 
+silent=False, post=False, legacy=False, from_id=PeerUser(user_id=6215069829), reply_to=None, ttl_period=None), 
+entity=Chat(id=4524529858, title='asdadasd', photo=ChatPhotoEmpty(), participants_count=3, date=datetime.datetime(
+2024, 8, 26, 8, 21, 35, tzinfo=datetime.timezone.utc), version=7, creator=True, left=False, deactivated=False, 
+call_active=False, call_not_empty=False, noforwards=False, migrated_to=None, admin_rights=None, 
+default_banned_rights=ChatBannedRights(until_date=datetime.datetime(2038, 1, 19, 3, 14, 7, 
+tzinfo=datetime.timezone.utc), view_messages=False, send_messages=False, send_media=False, send_stickers=False, 
+send_gifs=False, send_games=False, send_inline=False, embed_links=False, send_polls=False, change_info=False, 
+invite_users=False, pin_messages=False, manage_topics=False, send_photos=False, send_videos=False, 
+send_roundvideos=False, send_audios=False, send_voices=False, send_docs=False, send_plain=False)))
+
 
 """
