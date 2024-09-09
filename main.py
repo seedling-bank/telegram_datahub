@@ -90,7 +90,7 @@ async def handler(event):
                         }
                         query1 = (
                             update(t_lumoz_tg_users)
-                            .where(t_lumoz_tg_users.c.tg_code == int(user.id))
+                            .where(t_lumoz_tg_users.c.tg_id == int(user.id))
                             .values(**user_data)
                         )
                         await session.execute(query1)
@@ -145,7 +145,7 @@ async def handler(event):
                         }
                         query1 = (
                             update(t_users)
-                            .where(t_users.c.tg_code == str(user.id))
+                            .where(t_users.c.tg_id == str(user.id))
                             .values(**user_data)
                         )
                         await session.execute(query1)
