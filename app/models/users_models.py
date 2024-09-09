@@ -20,6 +20,24 @@ t_tg_users = Table(
     Column("time_at", DATETIME()),
 )
 
+
+t_lumoz_tg_users = Table(
+    "lumoz_tg_users",
+    metadata,
+    Column("id", INTEGER(), primary_key=True, autoincrement=True),
+    Column("tg_id", INTEGER()),
+    Column("user_id", INTEGER()),
+    Column("tg_first_name", String(255, "utf8mb4_unicode_520_ci")),
+    Column("tg_last_name", String(255, "utf8mb4_unicode_520_ci")),
+    Column("tg_username", String(255, "utf8mb4_unicode_520_ci")),
+    Column("tg_phone", String(255, "utf8mb4_unicode_520_ci")),
+    Column("create_time", String(255, "utf8mb4_unicode_520_ci")),
+    Column("update_time", String(255, "utf8mb4_unicode_520_ci")),
+    Column("chain", String(255, "utf8mb4_unicode_520_ci")),
+    Column("tg_code", INTEGER()),
+    Column("time_at", DATETIME()),
+)
+
 t_lumoz_tg_users_info = Table(
     "lumoz_tg_users_info",
     metadata,
@@ -44,6 +62,8 @@ t_users = Table(
     Column("discord_id", VARCHAR(255, "utf8mb4_unicode_ci")),
     Column("twitter_id", VARCHAR(255, "utf8mb4_unicode_ci")),
     Column("twitter_token", VARCHAR(512, "utf8mb4_unicode_ci")),
+    Column("twitter_name", VARCHAR(512, "utf8mb4_unicode_ci")),
+    Column("twitter_username", VARCHAR(512, "utf8mb4_unicode_ci")),
     Column("discord_name", VARCHAR(255, "utf8mb4_unicode_ci")),
     Column("country", VARCHAR(255, "utf8mb4_unicode_ci")),
     Column("email", VARCHAR(255, "utf8mb4_unicode_ci")),
@@ -52,4 +72,8 @@ t_users = Table(
     Column("tg_username", VARCHAR(255, "utf8mb4_unicode_ci")),
     Column("address", VARCHAR(255, "utf8mb4_unicode_ci")),
     Column("platform", VARCHAR(255, "utf8mb4_unicode_ci")),
+    Column("selected_icon", VARCHAR(255, "utf8mb4_unicode_ci")),
+    Column("chain", VARCHAR(255, "utf8mb4_unicode_ci")),
+    Column("discord_code", VARCHAR(255, "utf8mb4_unicode_ci")),
+    Column("tg_code", VARCHAR(255, "utf8mb4_unicode_ci")),
 )

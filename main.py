@@ -6,7 +6,7 @@ from datetime import datetime
 import loguru
 import pytz
 import redis
-from sqlalchemy import insert, event, select
+from sqlalchemy import insert, event, select, update
 from sqlalchemy.exc import DisconnectionError
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy.orm import sessionmaker
@@ -14,13 +14,13 @@ from redis import asyncio as aioredis
 
 from telethon import TelegramClient, events
 
-from app.models.users_models import t_tg_users, t_lumoz_tg_users_info
+from app.models.users_models import t_tg_users, t_lumoz_tg_users_info, t_lumoz_tg_users, t_users
 from app.utils.send_lark_message import send_a_message
 
 api_id = 20464789  # 你的 api_id
 api_hash = '87c3a2090b3c3fd98ea22da5e4d39a44'  # 你的 api_hash
 
-client = TelegramClient('session', api_id, api_hash)
+client = TelegramClient('aaaaaa', api_id, api_hash)
 # client = TelegramClient('abcd', api_id, api_hash)
 
 # with client:
@@ -84,23 +84,21 @@ async def handler(event):
 
                 try:
                     async with async_session() as session:
+
+                        user_data = {
+                            "tg_code": 1
+                        }
+                        query1 = (
+                            update(t_lumoz_tg_users)
+                            .where(t_lumoz_tg_users.c.tg_code == int(user.id))
+                            .values(**user_data)
+                        )
+                        await session.execute(query1)
+                        await session.commit()
+
                         query = insert(t_lumoz_tg_users_info).prefix_with("IGNORE").values(information)
                         await session.execute(query)
                         await session.commit()
-            #
-            #         query = select(t_users.c.id).where(t_users.c.tg_id == user.id)
-            #         try:
-            #             async with async_session() as session:
-            #                 result = await session.execute(query)
-            #                 user = result.scalars().first()
-            #
-            #                 if user:
-            #                     message = json.dumps(information)
-            #                     await redis_client.publish(f'update_tg_user_{user}', message)
-            #         except Exception as e:
-            #             loguru.logger.error(traceback.format_exc())
-            #             send_a_message(traceback.format_exc())
-            #
                 except Exception as e:
                     loguru.logger.error(traceback.format_exc())
                     send_a_message(traceback.format_exc())
@@ -141,6 +139,18 @@ async def handler(event):
 
                 try:
                     async with async_session() as session:
+
+                        user_data = {
+                            "tg_code": 1
+                        }
+                        query1 = (
+                            update(t_users)
+                            .where(t_users.c.tg_code == str(user.id))
+                            .values(**user_data)
+                        )
+                        await session.execute(query1)
+                        await session.commit()
+
                         query = insert(t_tg_users).prefix_with("IGNORE").values(information)
                         await session.execute(query)
                         await session.commit()
