@@ -155,19 +155,6 @@ async def handler(event):
                         await session.execute(query)
                         await session.commit()
 
-                    # query = select(t_users.c.id).where(t_users.c.tg_id == user.id)
-                    # try:
-                    #     async with async_session() as session:
-                    #         result = await session.execute(query)
-                    #         user = result.scalars().first()
-                    #
-                    #         if user:
-                    #             message = json.dumps(information)
-                    #             await redis_client.publish(f'update_tg_user_{user}', message)
-                    # except Exception as e:
-                    #     loguru.logger.error(traceback.format_exc())
-                    #     send_a_message(traceback.format_exc())
-
                 except Exception as e:
                     loguru.logger.error(traceback.format_exc())
                     send_a_message(traceback.format_exc())
