@@ -193,7 +193,7 @@ async def handler(event):
                     async with async_session() as session:
 
                         user_data = {
-                            "task_tg_code": 1
+                            "tg_code": 1
                         }
                         query1 = (
                             update(t_B2_user)
