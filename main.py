@@ -58,7 +58,7 @@ async def handler(event):
 
                 information = {
                     "tg_id": user.id,
-                    "tg_username": user.username,
+                    "tg_name": user.username,
                     "create_at": formatted_utc_time,
                     "update_at": formatted_utc_time,
                 }
