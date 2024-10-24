@@ -18,10 +18,10 @@ from app.utils.send_lark_message import send_a_message
 api_id = 20464789  # 你的 api_id
 api_hash = '87c3a2090b3c3fd98ea22da5e4d39a44'  # 你的 api_hash
 
-client = TelegramClient('session', api_id, api_hash)
+client = TelegramClient('session_prod', api_id, api_hash)
 
 engine = create_async_engine(
-    "mysql+aiomysql://deagent:deagentai123@cb-rds.cw5tnk9dgstt.us-west-2.rds.amazonaws.com/alphax_test?charset=utf8mb4",
+    "mysql+aiomysql://alphax:Alpha-X.AI123@52.27.236.128:8306/alphax?charset=utf8mb4",
     pool_pre_ping=True,
     pool_recycle=3600,
     pool_size=10,
